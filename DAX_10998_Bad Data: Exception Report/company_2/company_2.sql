@@ -1,0 +1,20 @@
+--
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+-- company-2 (ingestion) 
+
+SELECT DISTINCT primary_domain AS domain , company_country AS countryCode, primary_name AS name, company_status as status, employee_count from daas.dax_12136_temp_20250728 
+WHERE employee_count > 2500000 
+;
+
+--
+SELECT * from si_dataops_prod.daas.dax_12136_temp_20250728 limit 10 ; 
+--
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+-- company-2 (qa)
+
+SELECT DISTINCT * EXCEPT(naics_number, keywords_number, ceo_count,founder_count, president_count, ceo_presence_flag, naics_presence_flag )
+from daas.dax_12136_temp_20250728 
+WHERE employee_count > 2500000
+; 
+
+--
